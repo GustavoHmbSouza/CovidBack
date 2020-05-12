@@ -25,10 +25,19 @@ module.exports = {
                 defaltValue: false,
                 allowNull: false,
             },
-
             nom_telefone: {
                 type: Sequelize.STRING,
                 allowNull: true,
+            },
+            num_cidadeid: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: "Cidade",
+                    key: "id",
+                },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
             },
             created_at: {
                 type: Sequelize.DATE,
