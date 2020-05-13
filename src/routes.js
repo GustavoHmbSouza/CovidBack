@@ -5,6 +5,7 @@ import SessionController from "./app/controllers/SessionController";
 import authMiddleware from "./app/middlewares/auth";
 import CidadeController from "./app/controllers/CidadeController";
 import TopicoController from "./app/controllers/TopicoController";
+import PerguntaController from "./app/controllers/PerguntaController";
 
 const routes = new Router();
 
@@ -33,5 +34,12 @@ routes.put("/topico", TopicoController.update);
 routes.delete("/topico/:id", TopicoController.delete);
 routes.get("/topico/getall", TopicoController.getAll);
 routes.get("/topico/:id", TopicoController.get);
+
+routes.post("/pergunta", PerguntaController.post);
+routes.put("/pergunta", PerguntaController.update);
+routes.delete("/pergunta/:id", PerguntaController.delete);
+routes.get("/pergunta/getall", PerguntaController.getAll);
+routes.get("/pergunta/:id", PerguntaController.get);
+routes.get("/pergunta/getalltopico/:id", PerguntaController.getAllTopico);
 
 export default routes;
