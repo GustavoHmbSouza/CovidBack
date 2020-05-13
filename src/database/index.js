@@ -4,8 +4,9 @@ import databaseConfig from "../config/database";
 
 import User from "../app/models/User";
 import Cidade from "../app/models/Cidade";
+import Topico from "../app/models/Topico";
 
-const models = [User, Cidade];
+const models = [User, Cidade, Topico];
 
 class Database {
     constructor() {

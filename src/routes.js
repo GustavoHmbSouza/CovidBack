@@ -4,6 +4,7 @@ import UserController from "./app/controllers/UserController";
 import SessionController from "./app/controllers/SessionController";
 import authMiddleware from "./app/middlewares/auth";
 import CidadeController from "./app/controllers/CidadeController";
+import TopicoController from "./app/controllers/TopicoController";
 
 const routes = new Router();
 
@@ -26,5 +27,11 @@ routes.put("/cidade", CidadeController.update);
 routes.delete("/cidade/:id", CidadeController.delete);
 routes.get("/cidade/getall", CidadeController.getAll);
 routes.get("/cidade/:id", CidadeController.get);
+
+routes.post("/topico", TopicoController.post);
+routes.put("/topico", TopicoController.update);
+routes.delete("/topico/:id", TopicoController.delete);
+routes.get("/topico/getall", TopicoController.getAll);
+routes.get("/topico/:id", TopicoController.get);
 
 export default routes;
