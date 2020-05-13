@@ -12,6 +12,7 @@ class UserController {
                 nom_password: Yup.string()
                     .required()
                     .min(6),
+                num_cidadeid: Yup.number().required(),
             });
 
             if (!(await schema.isValid(req.body)))
@@ -87,13 +88,16 @@ class UserController {
                     .status(401)
                     .json({ error: "Senha não corresponde." });
 
-            const { id, nom_name, ind_admin } = await user.update(req.body);
+            const { id, nom_name, ind_admin, num_cidadeid } = await user.update(
+                req.body
+            );
 
             return res.json({
                 id,
                 nom_name,
                 nom_email,
                 ind_admin,
+                num_cidadeid,
             });
         } catch (e) {
             return res.status(400).json({ error: `Erro: ${e}` });

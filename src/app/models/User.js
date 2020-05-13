@@ -11,6 +11,7 @@ class User extends Model {
                 nom_passwordhash: Sequelize.STRING,
                 ind_admin: Sequelize.BOOLEAN,
                 nom_telefone: Sequelize.STRING,
+                num_cidadeid: Sequelize.INTEGER,
             },
             {
                 sequelize,
