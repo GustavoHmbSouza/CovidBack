@@ -11,6 +11,16 @@ const routes = new Router();
 
 routes.post("/sessions", SessionController.post);
 
+routes.get("/cidade/getall", CidadeController.getAll);
+routes.get("/cidade/:id", CidadeController.get);
+
+routes.get("/topico/getall", TopicoController.getAll);
+routes.get("/topico/:id", TopicoController.get);
+
+routes.get("/pergunta/getall", PerguntaController.getAll);
+routes.get("/pergunta/:id", PerguntaController.get);
+routes.get("/pergunta/getalltopico/:id", PerguntaController.getAllTopico);
+
 // O Middleware só vai ser chamado para as rotas que estão a baixo
 routes.use(authMiddleware);
 
@@ -26,20 +36,13 @@ routes.get("/users", UserController.getUser);
 routes.post("/cidade", CidadeController.post);
 routes.put("/cidade", CidadeController.update);
 routes.delete("/cidade/:id", CidadeController.delete);
-routes.get("/cidade/getall", CidadeController.getAll);
-routes.get("/cidade/:id", CidadeController.get);
 
 routes.post("/topico", TopicoController.post);
 routes.put("/topico", TopicoController.update);
 routes.delete("/topico/:id", TopicoController.delete);
-routes.get("/topico/getall", TopicoController.getAll);
-routes.get("/topico/:id", TopicoController.get);
 
 routes.post("/pergunta", PerguntaController.post);
 routes.put("/pergunta", PerguntaController.update);
 routes.delete("/pergunta/:id", PerguntaController.delete);
-routes.get("/pergunta/getall", PerguntaController.getAll);
-routes.get("/pergunta/:id", PerguntaController.get);
-routes.get("/pergunta/getalltopico/:id", PerguntaController.getAllTopico);
 
 export default routes;
