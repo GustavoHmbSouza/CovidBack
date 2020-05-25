@@ -6,7 +6,7 @@ module.exports = {
                 {
                     nom_name: "Como evitar a contaminação?",
                     nom_resposta: "Sim",
-                    nom_responsável: "Caio",
+                    num_userid: 1,
                     num_topicoid: 1,
                     created_at: new Date(),
                     updated_at: new Date(),
@@ -14,7 +14,7 @@ module.exports = {
                 {
                     nom_name: "Como previnir?",
                     nom_resposta: "Não",
-                    nom_responsável: "Jorge",
+                    num_userid: 3,
                     num_topicoid: 2,
                     created_at: new Date(),
                     updated_at: new Date(),

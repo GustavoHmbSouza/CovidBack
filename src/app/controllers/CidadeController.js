@@ -7,6 +7,7 @@ class CidadeController {
         try {
             const schema = Yup.object().shape({
                 nom_name: Yup.string().required(),
+                nom_uf: Yup.string().required(),
             });
 
             if (!(await schema.isValid(req.body)))
@@ -29,6 +30,7 @@ class CidadeController {
         try {
             const schema = Yup.object().shape({
                 nom_name: Yup.string().required(),
+                nom_uf: Yup.string().required(),
             });
 
             if (!(await schema.isValid(req.body)))

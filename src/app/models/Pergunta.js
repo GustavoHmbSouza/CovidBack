@@ -1,5 +1,6 @@
 import Sequelize, { Model } from "sequelize";
 import Topico from "./Topico";
+import User from "./User";
 
 class Pergunta extends Model {
     static init(sequelize) {
@@ -9,6 +10,7 @@ class Pergunta extends Model {
                 nom_resposta: Sequelize.STRING,
                 nom_responsável: Sequelize.STRING,
                 num_topicoid: Sequelize.INTEGER,
+                num_userid: Sequelize.INTEGER,
             },
             {
                 sequelize,
@@ -23,6 +25,15 @@ class Pergunta extends Model {
         });
         Pergunta.belongsTo(Topico, {
             foreignKey: "num_topicoid",
+        });
+
+        User.hasMany(Pergunta, {
+            foreignKey: "num_userid",
+            onDelete: "cascade",
+            hooks: true,
+        });
+        Pergunta.belongsTo(User, {
+            foreignKey: "num_userid",
         });
 
         return this;

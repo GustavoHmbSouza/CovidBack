@@ -9,7 +9,7 @@ class PerguntaController {
             const schema = Yup.object().shape({
                 nom_name: Yup.string().required(),
                 nom_resposta: Yup.string().required(),
-                nom_responsável: Yup.string().required(),
+                num_userid: Yup.number().required(),
                 num_topicoid: Yup.number().required(),
             });
 

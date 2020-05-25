@@ -15,9 +15,15 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            nom_responsável: {
-                type: Sequelize.STRING,
+            num_userid: {
+                type: Sequelize.INTEGER,
                 allowNull: false,
+                references: {
+                    model: "User",
+                    key: "id",
+                },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
             },
             num_topicoid: {
                 type: Sequelize.INTEGER,
