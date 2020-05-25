@@ -5,11 +5,13 @@ module.exports = {
             [
                 {
                     nom_name: "Passos",
+                    nom_uf: "Mg",
                     created_at: new Date(),
                     updated_at: new Date(),
                 },
                 {
                     nom_name: "Itau",
+                    nom_uf: "Sp",
                     created_at: new Date(),
                     updated_at: new Date(),
                 },

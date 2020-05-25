@@ -6,6 +6,7 @@ class Cidade extends Model {
         super.init(
             {
                 nom_name: Sequelize.STRING,
+                nom_uf: Sequelize.STRING,
             },
             {
                 sequelize,
