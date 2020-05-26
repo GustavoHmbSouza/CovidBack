@@ -6,6 +6,7 @@ import authMiddleware from "./app/middlewares/auth";
 import CidadeController from "./app/controllers/CidadeController";
 import TopicoController from "./app/controllers/TopicoController";
 import PerguntaController from "./app/controllers/PerguntaController";
+import DecretoController from "./app/controllers/DecretoController";
 
 const routes = new Router();
 
@@ -20,6 +21,9 @@ routes.get("/topico/:id", TopicoController.get);
 routes.get("/pergunta/getall", PerguntaController.getAll);
 routes.get("/pergunta/:id", PerguntaController.get);
 routes.get("/pergunta/getalltopico/:id", PerguntaController.getAllTopico);
+
+routes.get("/decreto/getall", DecretoController.getAll);
+routes.get("/decreto/:id", DecretoController.get);
 
 // O Middleware só vai ser chamado para as rotas que estão a baixo
 routes.use(authMiddleware);
@@ -44,5 +48,9 @@ routes.delete("/topico/:id", TopicoController.delete);
 routes.post("/pergunta", PerguntaController.post);
 routes.put("/pergunta", PerguntaController.update);
 routes.delete("/pergunta/:id", PerguntaController.delete);
+
+routes.post("/decreto", DecretoController.post);
+routes.put("/decreto", DecretoController.update);
+routes.delete("/decreto/:id", DecretoController.delete);
 
 export default routes;

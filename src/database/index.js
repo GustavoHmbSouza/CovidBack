@@ -6,8 +6,9 @@ import User from "../app/models/User";
 import Cidade from "../app/models/Cidade";
 import Topico from "../app/models/Topico";
 import Pergunta from "../app/models/Pergunta";
+import Decreto from "../app/models/Decreto";
 
-const models = [User, Cidade, Topico, Pergunta];
+const models = [User, Cidade, Topico, Pergunta, Decreto];
 
 class Database {
     constructor() {
