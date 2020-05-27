@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 import Decreto from "../models/Decreto";
 import User from "../models/User";
+import Cidade from "../models/Cidade";
 
 class TopicoController {
     async post(req, res) {
@@ -15,10 +16,21 @@ class TopicoController {
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
 
-            const user = new User();
+            let user = new User();
+            if (!(await user.verificaUserAdmin(req))) {
+                user = await User.findOne({
+                    where: {
+                        id: req.num_userid,
+                        num_cidadeid: req.body.num_cidadeid,
+                    },
+                });
 
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
+                if (!user)
+                    return res.status(400).json({
+                        error:
+                            "Usuário não tem permissão para está cidade ou não é admin.",
+                    });
+            }
 
             const decreto = await Decreto.create(req.body);
 
@@ -40,12 +52,23 @@ class TopicoController {
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
 
-            const user = new User();
+            let user = new User();
+            if (!(await user.verificaUserAdmin(req))) {
+                user = await User.findOne({
+                    where: {
+                        id: req.num_userid,
+                        num_cidadeid: req.body.num_cidadeid,
+                    },
+                });
 
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
+                if (!user)
+                    return res.status(400).json({
+                        error:
+                            "Usuário não tem permissão para está cidade ou não é admin.",
+                    });
+            }
 
-            const decreto = await Decreto.findByPk(req.body.id);
+            const decreto = await Decreto.findByPk(req.num_userid);
 
             const resDecreto = await decreto.update(req.body);
 
@@ -59,8 +82,28 @@ class TopicoController {
         try {
             const user = new User();
 
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
+            if (!(await user.verificaUserAdmin(req))) {
+                const decreto = await Decreto.findOne({
+                    where: { id: req.params.id },
+                    include: {
+                        model: Cidade,
+                        required: true,
+                        include: {
+                            model: User,
+                            required: true,
+                            where: {
+                                id: req.num_userid,
+                            },
+                        },
+                    },
+                });
+
+                if (!decreto)
+                    return res.status(400).json({
+                        error:
+                            "Usuário não tem permissão para está cidade ou não é admin.",
+                    });
+            }
 
             const decreto = await Decreto.findByPk(req.params.id);
 
