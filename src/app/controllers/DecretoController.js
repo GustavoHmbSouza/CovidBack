@@ -134,6 +134,18 @@ class TopicoController {
             return res.status(400).json({ error: `Erro: ${e}` });
         }
     }
+
+    async getAllCidade(req, res) {
+        try {
+            const decreto = await Decreto.findAll({
+                where: { num_cidadeid: req.params.id },
+            });
+
+            return res.json(decreto);
+        } catch (e) {
+            return res.status(400).json({ error: `Erro: ${e}` });
+        }
+    }
 }
 
 export default new TopicoController();

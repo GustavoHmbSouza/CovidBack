@@ -11,3 +11,6 @@
 
     * BCK001: Login / Crud Usuários
     * BCK002: Crud Cidades
+    * BCK003: Crud Tópicos
+    * BCK004: Crud Perguntas
+    * BCK005: Crud Decretos

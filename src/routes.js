@@ -24,6 +24,7 @@ routes.get("/pergunta/getalltopico/:id", PerguntaController.getAllTopico);
 
 routes.get("/decreto/getall", DecretoController.getAll);
 routes.get("/decreto/:id", DecretoController.get);
+routes.get("/decreto/getallcidade/:id", DecretoController.getAllCidade);
 
 // O Middleware só vai ser chamado para as rotas que estão a baixo
 routes.use(authMiddleware);
