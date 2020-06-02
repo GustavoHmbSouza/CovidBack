@@ -68,7 +68,7 @@ class TopicoController {
                     });
             }
 
-            const decreto = await Decreto.findByPk(req.num_userid);
+            const decreto = await Decreto.findByPk(req.body.id);
 
             const resDecreto = await decreto.update(req.body);
 

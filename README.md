@@ -14,3 +14,4 @@
     * BCK003: Crud Tópicos
     * BCK004: Crud Perguntas
     * BCK005: Crud Decretos
+    * BCK006: Crud PerguntasUsers
