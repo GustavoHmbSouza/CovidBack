@@ -1,5 +1,4 @@
 import Sequelize, { Model } from "sequelize";
-import Cidade from "./Cidade";
 
 class Perguntauser extends Model {
     static init(sequelize) {

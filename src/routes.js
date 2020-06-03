@@ -1,5 +1,8 @@
 import { Router } from "express";
 
+import multer from "multer";
+import uploadConfig from "./config/upload";
+
 import UserController from "./app/controllers/UserController";
 import SessionController from "./app/controllers/SessionController";
 import authMiddleware from "./app/middlewares/auth";
@@ -8,8 +11,10 @@ import TopicoController from "./app/controllers/TopicoController";
 import PerguntaController from "./app/controllers/PerguntaController";
 import DecretoController from "./app/controllers/DecretoController";
 import PerguntauserController from "./app/controllers/PerguntauserController";
+import NoticiaController from "./app/controllers/NoticiaController";
 
 const routes = new Router();
+const upload = multer(uploadConfig);
 
 routes.post("/sessions", SessionController.post);
 
@@ -36,6 +41,9 @@ routes.put(
 routes.delete("/perguntauser/:id", PerguntauserController.delete);
 routes.get("/perguntauser/getall", PerguntauserController.getAll);
 routes.get("/perguntauser/:id", PerguntauserController.get);
+
+routes.get("/noticia/getall", NoticiaController.getAll);
+routes.get("/noticia/:id", NoticiaController.get);
 
 // O Middleware só vai ser chamado para as rotas que estão a baixo
 routes.use(authMiddleware);
@@ -64,5 +72,14 @@ routes.delete("/pergunta/:id", PerguntaController.delete);
 routes.post("/decreto", DecretoController.post);
 routes.put("/decreto", DecretoController.update);
 routes.delete("/decreto/:id", DecretoController.delete);
+
+routes.post("/noticia", NoticiaController.post);
+routes.put("/noticia", NoticiaController.update);
+routes.delete("/noticia/:id", NoticiaController.delete);
+routes.patch(
+    "/noticia/updateimagem/:id",
+    upload.single("imagem"),
+    NoticiaController.updateImagem
+);
 
 export default routes;
