@@ -8,7 +8,6 @@ class Pergunta extends Model {
             {
                 nom_name: Sequelize.STRING,
                 nom_resposta: Sequelize.STRING,
-                nom_responsável: Sequelize.STRING,
                 num_topicoid: Sequelize.INTEGER,
                 num_userid: Sequelize.INTEGER,
             },
