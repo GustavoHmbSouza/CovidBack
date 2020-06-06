@@ -1,7 +1,7 @@
 {
     "scripts": {
         "dev": "nodemon src/server.js",
-        "bd-prod": "yarn bd-resetBd && yarn sequelize-cli db:seed --seed 20200206134355-admin-user.js",
+        "bd-prod": "yarn bd-resetBd && yarn sequelize-cli db:seed --seed 20200196134355-demo-cidade.js && yarn sequelize-cli db:seed --seed 20200206134355-admin-user.js",
         "bd-dev": "yarn bd-resetBd && yarn sequelize-cli db:seed:all",
         "bd-resetBd": "yarn sequelize db:migrate:undo:all && yarn sequelize db:migrate",
         "build": "sucrase ./src -d ./dist --transforms imports",
