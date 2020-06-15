@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 import Perguntauser from "../models/Perguntauser";
+import User from "../models/User";
 
 class TopicoController {
     async post(req, res) {
@@ -30,6 +31,11 @@ class TopicoController {
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
 
+            const user = new User();
+
+            if (!(await user.verificaUserAdmin(req)))
+                return res.status(401).json({ error: "Acesso negado." });
+
             const perguntaUser = await Perguntauser.findByPk(req.body.id);
 
             const resPerguntaUser = await perguntaUser.update(req.body);
@@ -49,6 +55,11 @@ class TopicoController {
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
 
+            const user = new User();
+
+            if (!(await user.verificaUserAdmin(req)))
+                return res.status(401).json({ error: "Acesso negado." });
+
             const perguntaUser = await Perguntauser.findByPk(req.body.id);
 
             const resPerguntaUser = await perguntaUser.update(req.body);
@@ -61,6 +72,11 @@ class TopicoController {
 
     async delete(req, res) {
         try {
+            const user = new User();
+
+            if (!(await user.verificaUserAdmin(req)))
+                return res.status(401).json({ error: "Acesso negado." });
+
             const perguntaUser = await Perguntauser.findByPk(req.params.id);
 
             await perguntaUser.destroy();

@@ -61,7 +61,7 @@ class TopicoController {
                     },
                 });
 
-                if (!user)
+                if (!user || user.num_cidadeid !== req.body.num_cidadeid)
                     return res.status(400).json({
                         error:
                             "Usuário não tem permissão para está cidade ou não é admin.",

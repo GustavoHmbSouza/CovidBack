@@ -33,12 +33,6 @@ routes.get("/decreto/:id", DecretoController.get);
 routes.get("/decreto/getallcidade/:id", DecretoController.getAllCidade);
 
 routes.post("/perguntauser", PerguntauserController.post);
-routes.put("/perguntauser", PerguntauserController.update);
-routes.put(
-    "/perguntauser/updaterespondido",
-    PerguntauserController.updateRespondido
-);
-routes.delete("/perguntauser/:id", PerguntauserController.delete);
 routes.get("/perguntauser/getall", PerguntauserController.getAll);
 routes.get("/perguntauser/:id", PerguntauserController.get);
 
@@ -81,5 +75,12 @@ routes.patch(
     upload.single("imagem"),
     NoticiaController.updateImagem
 );
+
+routes.put("/perguntauser", PerguntauserController.update);
+routes.put(
+    "/perguntauser/updaterespondido",
+    PerguntauserController.updateRespondido
+);
+routes.delete("/perguntauser/:id", PerguntauserController.delete);
 
 export default routes;
