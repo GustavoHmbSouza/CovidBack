@@ -15,11 +15,6 @@ class PerguntaController {
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
 
-            const user = new User();
-
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
-
             const pergunta = await Pergunta.create(req.body);
 
             return res.json(pergunta);
@@ -36,11 +31,6 @@ class PerguntaController {
 
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
-
-            const user = new User();
-
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
 
             const pergunta = await Pergunta.findByPk(req.body.id);
 

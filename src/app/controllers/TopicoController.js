@@ -12,11 +12,6 @@ class TopicoController {
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
 
-            const user = new User();
-
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
-
             const topico = await Topico.create(req.body);
 
             return res.json(topico);
@@ -33,11 +28,6 @@ class TopicoController {
 
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
-
-            const user = new User();
-
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
 
             const topico = await Topico.findByPk(req.body.id);
 

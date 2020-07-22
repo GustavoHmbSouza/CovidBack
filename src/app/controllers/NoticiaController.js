@@ -2,6 +2,7 @@ import * as Yup from "yup";
 import path from "path";
 import Noticia from "../models/Noticia";
 import User from "../models/User";
+import Topico from "../models/Topico";
 import uploadConfig from "../../config/upload";
 import fs from "fs";
 
@@ -17,11 +18,6 @@ class NoticiaController {
 
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
-
-            const user = new User();
-
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
 
             const noticia = await Noticia.create(req.body);
 
@@ -42,11 +38,6 @@ class NoticiaController {
 
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
-
-            const user = new User();
-
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
 
             const noticia = await Noticia.findByPk(req.body.id);
 
@@ -77,7 +68,18 @@ class NoticiaController {
 
     async getAll(req, res) {
         try {
-            const noticia = await Noticia.findAll();
+            const noticia = await Noticia.findAll({
+                include: [
+                    {
+                        model: User,
+                        required: true,
+                    },
+                    {
+                        model: Topico,
+                        required: true,
+                    },
+                ],
+            });
 
             return res.json(noticia);
         } catch (e) {
@@ -87,7 +89,21 @@ class NoticiaController {
 
     async get(req, res) {
         try {
-            const noticia = await Noticia.findByPk(req.params.id);
+            const noticia = await Noticia.findOne({
+                where: {
+                    id: req.params.id,
+                },
+                include: [
+                    {
+                        model: User,
+                        required: true,
+                    },
+                    {
+                        model: Topico,
+                        required: true,
+                    },
+                ],
+            });
 
             return res.json(noticia);
         } catch (e) {

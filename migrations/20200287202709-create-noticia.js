@@ -27,6 +27,26 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true,
             },
+            num_topicoid: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: "Topico",
+                    key: "id",
+                },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
+            },
+            num_userid: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: "User",
+                    key: "id",
+                },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
+            },
             created_at: {
                 type: Sequelize.DATE,
                 allowNull: false,

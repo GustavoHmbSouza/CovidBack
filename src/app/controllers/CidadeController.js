@@ -13,11 +13,6 @@ class CidadeController {
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
 
-            const user = new User();
-
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
-
             const cidade = await Cidade.create(req.body);
 
             return res.json(cidade);
@@ -35,11 +30,6 @@ class CidadeController {
 
             if (!(await schema.isValid(req.body)))
                 return res.status(400).json({ error: "Erro de validação." });
-
-            const user = new User();
-
-            if (!(await user.verificaUserAdmin(req)))
-                return res.status(401).json({ error: "Acesso negado." });
 
             const cidade = await Cidade.findByPk(req.body.id);
 
