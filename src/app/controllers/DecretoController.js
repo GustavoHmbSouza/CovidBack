@@ -1,7 +1,10 @@
 import * as Yup from "yup";
+import path from "path";
+import fs from "fs";
 import Decreto from "../models/Decreto";
 import User from "../models/User";
 import Cidade from "../models/Cidade";
+import uploadConfig from "../../config/upload";
 
 class TopicoController {
     async post(req, res) {
@@ -117,7 +120,9 @@ class TopicoController {
 
     async getAll(req, res) {
         try {
-            const decreto = await Decreto.findAll();
+            const decreto = await Decreto.findAll({
+                include: { model: Cidade, required: true },
+            });
 
             return res.json(decreto);
         } catch (e) {
@@ -127,7 +132,10 @@ class TopicoController {
 
     async get(req, res) {
         try {
-            const decreto = await Decreto.findByPk(req.params.id);
+            const decreto = await Decreto.findOne({
+                include: { model: Cidade, required: true },
+                where: { id: req.params.id },
+            });
 
             return res.json(decreto);
         } catch (e) {
@@ -138,10 +146,40 @@ class TopicoController {
     async getAllCidade(req, res) {
         try {
             const decreto = await Decreto.findAll({
+                include: { model: Cidade, required: true },
                 where: { num_cidadeid: req.params.id },
             });
 
             return res.json(decreto);
+        } catch (e) {
+            return res.status(400).json({ error: `Erro: ${e}` });
+        }
+    }
+
+    async updateFile(req, res) {
+        try {
+            const decreto = await Decreto.findByPk(req.params.id);
+
+            if (!decreto)
+                return res
+                    .status(400)
+                    .json({ error: `Decreto não encontrada` });
+
+            if (decreto.nom_file) {
+                const imagemFilePath = path.join(
+                    uploadConfig.direct,
+                    decreto.nom_file
+                );
+                const imagemFileExist = await fs.promises.stat(imagemFilePath);
+
+                if (imagemFileExist) await fs.promises.unlink(imagemFilePath);
+            }
+
+            const resdecreto = await decreto.update({
+                nom_file: req.file.filename,
+            });
+
+            return res.json(resdecreto);
         } catch (e) {
             return res.status(400).json({ error: `Erro: ${e}` });
         }

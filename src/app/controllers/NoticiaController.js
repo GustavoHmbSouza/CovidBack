@@ -1,10 +1,10 @@
 import * as Yup from "yup";
 import path from "path";
+import fs from "fs";
 import Noticia from "../models/Noticia";
 import User from "../models/User";
 import Topico from "../models/Topico";
 import uploadConfig from "../../config/upload";
-import fs from "fs";
 
 class NoticiaController {
     async post(req, res) {

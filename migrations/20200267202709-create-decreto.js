@@ -19,6 +19,10 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
+            nom_file: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
             num_cidadeid: {
                 type: Sequelize.INTEGER,
                 allowNull: false,

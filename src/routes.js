@@ -66,6 +66,11 @@ routes.delete("/pergunta/:id", PerguntaController.delete);
 routes.post("/decreto", DecretoController.post);
 routes.put("/decreto", DecretoController.update);
 routes.delete("/decreto/:id", DecretoController.delete);
+routes.patch(
+    "/decreto/updatefile/:id",
+    upload.single("imagem"),
+    DecretoController.updateFile
+);
 
 routes.post("/noticia", NoticiaController.post);
 routes.put("/noticia", NoticiaController.update);

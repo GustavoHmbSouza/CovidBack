@@ -8,6 +8,7 @@ class Decreto extends Model {
                 nom_titulo: Sequelize.STRING,
                 dat_data: Sequelize.DATE,
                 nom_conteudo: Sequelize.STRING,
+                nom_file: Sequelize.STRING,
                 num_cidadeid: Sequelize.INTEGER,
             },
             {

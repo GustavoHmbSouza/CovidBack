@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 import Pergunta from "../models/Pergunta";
 import User from "../models/User";
+import Topico from "../models/Topico";
 
 class PerguntaController {
     async post(req, res) {
@@ -64,7 +65,18 @@ class PerguntaController {
 
     async getAll(req, res) {
         try {
-            const pergunta = await Pergunta.findAll();
+            const pergunta = await Pergunta.findAll({
+                include: [
+                    {
+                        model: Topico,
+                        required: true,
+                    },
+                    {
+                        model: User,
+                        required: true,
+                    },
+                ],
+            });
 
             return res.json(pergunta);
         } catch (e) {
@@ -74,7 +86,20 @@ class PerguntaController {
 
     async get(req, res) {
         try {
-            const pergunta = await Pergunta.findByPk(req.params.id);
+            const pergunta = await Pergunta.findOne({
+                include: [
+                    {
+                        model: Topico,
+                        required: true,
+                    },
+                    {
+                        model: User,
+                        required: true,
+                    },
+                ],
+
+                where: { id: req.params.id },
+            });
 
             return res.json(pergunta);
         } catch (e) {
@@ -85,6 +110,17 @@ class PerguntaController {
     async getAllTopico(req, res) {
         try {
             const pergunta = await Pergunta.findAll({
+                include: [
+                    {
+                        model: Topico,
+                        required: true,
+                    },
+                    {
+                        model: User,
+                        required: true,
+                    },
+                ],
+
                 where: { num_topicoid: req.params.id },
             });
 
