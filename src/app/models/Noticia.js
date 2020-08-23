@@ -9,7 +9,7 @@ class Noticia extends Model {
                 nom_titulo: Sequelize.STRING,
                 nom_subtitulo: Sequelize.STRING,
                 dat_data: Sequelize.DATE,
-                nom_conteudo: Sequelize.STRING,
+                nom_conteudo: Sequelize.STRING(5000),
                 nom_imagem: Sequelize.STRING,
                 num_topicoid: Sequelize.INTEGER,
                 num_userid: Sequelize.INTEGER,

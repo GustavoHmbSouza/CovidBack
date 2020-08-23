@@ -20,7 +20,7 @@ module.exports = {
                 allowNull: false,
             },
             nom_conteudo: {
-                type: Sequelize.STRING,
+                type: Sequelize.STRING(5000),
                 allowNull: false,
             },
             nom_imagem: {
